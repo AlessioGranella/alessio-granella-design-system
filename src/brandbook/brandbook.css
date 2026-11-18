@@ -1,0 +1,125 @@
+/* Brandbook — A4 orizzontale. Misure in mm/pt: è un documento di stampa.
+   Colori e carattere vengono dai token --ag-*. */
+
+@page { size: 297mm 210mm; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #8a8f8b; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font-family: var(--ag-font); color: var(--ag-ink); -webkit-font-smoothing: antialiased; }
+
+.bb { display: grid; gap: 10mm; justify-content: center; padding: 10mm 0; }
+@media print { html, body { background: none; } .bb { display: block; padding: 0; } }
+
+.bb-page { position: relative; width: 297mm; height: 210mm; overflow: hidden; background: var(--ag-paper);
+  page-break-after: always; break-after: page; }
+.bb-page:last-child { page-break-after: auto; break-after: auto; }
+.bb-page--soft { background: var(--ag-soft); }
+.bb-page--ink { background: var(--ag-ink); color: var(--ag-on-dark); }
+.bb-page--verde { background: var(--ag-verde); color: var(--ag-on-dark); }
+
+/* Gabbia: margini 16 mm, testata 12 mm, piede 12 mm */
+.bb-pad { position: absolute; inset: 16mm 16mm 20mm; }
+.bb-folio { position: absolute; left: 16mm; right: 16mm; bottom: 9mm; display: flex; justify-content: space-between;
+  font-size: 7pt; letter-spacing: .06em; color: var(--ag-muted); }
+.bb-page--ink .bb-folio, .bb-page--verde .bb-folio { color: var(--ag-on-dark-muted); }
+
+/* Tipografia di stampa */
+.bb-eyebrow { font-size: 7.4pt; font-weight: 500; text-transform: uppercase; letter-spacing: .22em; color: var(--ag-rust); }
+.bb-page--ink .bb-eyebrow, .bb-page--verde .bb-eyebrow { color: var(--ag-muschio); }
+.bb-display { font-size: 64pt; font-weight: 300; line-height: .94; letter-spacing: -.03em; }
+.bb-h1 { font-size: 40pt; font-weight: 300; line-height: .98; letter-spacing: -.03em; }
+.bb-h2 { font-size: 22pt; font-weight: 300; line-height: 1.06; letter-spacing: -.02em; }
+.bb-h3 { font-size: 12.5pt; font-weight: 400; line-height: 1.2; letter-spacing: -.01em; }
+.bb-p { font-size: 9.6pt; line-height: 1.5; color: var(--ag-body); max-width: 118mm; }
+.bb-page--ink .bb-p, .bb-page--verde .bb-p { color: var(--ag-on-dark-muted); }
+.bb-small { font-size: 7.6pt; line-height: 1.45; color: var(--ag-muted); }
+.bb-mono { font-family: ui-monospace, Menlo, monospace; font-size: 6.8pt; letter-spacing: 0; }
+.bb-em { color: var(--ag-rust); }
+.bb-page--ink .bb-em, .bb-page--verde .bb-em { color: var(--ag-muschio); }
+.bb-p + .bb-p { margin-top: 2.4mm; }
+
+/* Intestazione: eyebrow a sinistra, titolo a destra (come sul sito) */
+.bb-head { display: grid; grid-template-columns: 62mm 1fr; gap: 8mm; align-items: start; }
+.bb-head .bb-eyebrow { padding-top: 3mm; }
+.bb-body { display: grid; grid-template-columns: 62mm 1fr; gap: 8mm; margin-top: 10mm; }
+
+/* Liste a filetti */
+.bb-list { list-style: none; border-top: .3mm solid var(--ag-line); }
+.bb-list li { display: grid; grid-template-columns: 38mm 1fr; gap: 5mm; padding: 2.4mm 0; border-bottom: .3mm solid var(--ag-line);
+  font-size: 8.8pt; line-height: 1.42; color: var(--ag-body); }
+.bb-list b { font-weight: 500; color: var(--ag-ink); }
+.bb-page--ink .bb-list, .bb-page--ink .bb-list li, .bb-page--verde .bb-list, .bb-page--verde .bb-list li { border-color: var(--ag-line-dark); color: var(--ag-on-dark-muted); }
+.bb-page--ink .bb-list b, .bb-page--verde .bb-list b { color: var(--ag-on-dark); }
+
+/* Sì / No */
+.bb-dd { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+.bb-dd > div { background: var(--ag-white); padding: 4mm 5mm; border-top: .8mm solid var(--ag-verde); }
+.bb-dd > div + div { border-top-color: var(--ag-rust); }
+.bb-dd h4 { font-size: 7pt; font-weight: 500; text-transform: uppercase; letter-spacing: .2em; margin-bottom: 2mm; }
+.bb-dd ul { padding-left: 3.5mm; font-size: 8.2pt; line-height: 1.45; color: var(--ag-body); }
+.bb-dd li + li { margin-top: 1mm; }
+
+/* Copertina */
+.bb-cover { position: absolute; inset: 16mm; display: flex; flex-direction: column; justify-content: space-between; }
+.bb-cover__title { font-size: 120pt; font-weight: 300; line-height: .82; letter-spacing: -.045em; color: var(--ag-paper); }
+.bb-cover__row { display: flex; justify-content: space-between; align-items: end; }
+
+/* Indice */
+.bb-toc { list-style: none; border-top: .3mm solid var(--ag-line); }
+.bb-toc li { display: grid; grid-template-columns: 14mm 1fr 14mm; align-items: baseline; padding: 2.6mm 0; border-bottom: .3mm solid var(--ag-line); }
+.bb-toc span:first-child { font-size: 7.4pt; font-weight: 500; letter-spacing: .2em; color: var(--ag-rust); }
+.bb-toc b { font-size: 15pt; font-weight: 300; letter-spacing: -.015em; }
+.bb-toc span:last-child { text-align: right; font-size: 8pt; color: var(--ag-muted); }
+
+/* Foto a pieno margine */
+.bb-split { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; }
+.bb-split img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bb-split__copy { position: relative; padding: 16mm 16mm 20mm 14mm; display: flex; flex-direction: column; justify-content: space-between; }
+
+/* Valori */
+.bb-values { display: grid; grid-template-columns: repeat(3, 1fr); gap: .3mm; background: var(--ag-line); border: .3mm solid var(--ag-line); }
+.bb-values div { background: var(--ag-paper); padding: 6mm 5mm; min-height: 50mm; display: flex; flex-direction: column; justify-content: space-between; }
+.bb-values b { display: block; font-size: 24pt; font-weight: 300; letter-spacing: -.02em; margin-bottom: 1.5mm; }
+.bb-values span { font-size: 8.2pt; line-height: 1.4; color: var(--ag-body); }
+
+/* Parole */
+.bb-words { display: flex; flex-wrap: wrap; gap: 1.6mm; list-style: none; }
+.bb-words li { border: .3mm solid var(--ag-line); background: var(--ag-white); padding: .8mm 2.6mm; font-size: 8pt; }
+.bb-words--no li { text-decoration: line-through; color: var(--ag-muted); }
+
+/* Tessere marchio */
+.bb-tiles { display: grid; gap: 4mm; }
+.bb-tile { display: grid; place-items: center; position: relative; }
+.bb-tile small { position: absolute; left: 3mm; bottom: 2.4mm; font-size: 6.6pt; letter-spacing: .06em; }
+.bb-x { position: absolute; top: 2.4mm; right: 3mm; width: 5mm; height: 5mm; }
+.bb-x::before, .bb-x::after { content: ''; position: absolute; left: 50%; top: 0; width: .5mm; height: 100%; background: var(--ag-rust); transform: rotate(45deg); }
+.bb-x::after { transform: rotate(-45deg); }
+
+/* Area di rispetto */
+.bb-clear { position: relative; display: inline-block; outline: .3mm dashed var(--ag-rust); }
+.bb-clear__mark { position: absolute; font-size: 6.6pt; color: var(--ag-rust); letter-spacing: .04em; }
+
+/* Colonne colore */
+.bb-swatches { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(7, 1fr); }
+.bb-sw { position: relative; padding: 16mm 4mm 20mm; display: flex; flex-direction: column; justify-content: space-between; }
+.bb-sw b { font-size: 17pt; font-weight: 300; letter-spacing: -.02em; }
+.bb-sw dl { display: grid; grid-template-columns: auto 1fr; gap: .6mm 2mm; font-size: 6.6pt; line-height: 1.35; }
+.bb-sw dt { opacity: .7; }
+.bb-sw p { font-size: 7pt; line-height: 1.4; margin-top: 3mm; opacity: .85; }
+
+/* Tabelle */
+.bb-table { width: 100%; border-collapse: collapse; font-size: 7.8pt; }
+.bb-table th { text-align: left; font-size: 6.4pt; font-weight: 500; text-transform: uppercase; letter-spacing: .14em;
+  padding: 0 2.5mm 2mm 0; border-bottom: .3mm solid var(--ag-ink); white-space: nowrap; }
+.bb-table td { padding: 3.6mm 2.5mm 3.6mm 0; border-bottom: .3mm solid var(--ag-line); vertical-align: middle; color: var(--ag-body); }
+.bb-chip { display: inline-flex; align-items: center; gap: 2mm; white-space: nowrap; }
+.bb-chip i { width: 8mm; height: 8mm; flex: none; border: .2mm solid rgb(0 0 0 / .1); }
+.bb-chip span { line-height: 1.2; }
+.bb-chip small { display: block; font-size: 6.4pt; color: var(--ag-muted); }
+
+/* Scala tipografica */
+.bb-scale { display: grid; grid-template-columns: 30mm 1fr 34mm; align-items: baseline; gap: 4mm; padding: 2mm 0; border-bottom: .3mm solid var(--ag-line); }
+.bb-scale small { font-size: 6.6pt; color: var(--ag-muted); line-height: 1.4; }
+
+/* Mockup applicazioni */
+.bb-shot { display: block; width: 100%; border: .3mm solid var(--ag-line); background: var(--ag-white); }
+.bb-shadow { box-shadow: 0 1.2mm 4mm rgb(26 43 30 / .18); }

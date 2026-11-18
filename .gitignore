@@ -1,0 +1,11 @@
+node_modules
+dist
+.DS_Store
+*.local
+
+# Font: gli OTF (licenza desktop) mai nel repo.
+# I WOFF2 in src/styles/font/ sono coperti dalla licenza Webfonts MyFonts #6538608.
+*.otf
+*.woff
+*.woff2
+!src/styles/font/*.woff2

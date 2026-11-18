@@ -1,0 +1,133 @@
+/* ==========================================================================
+   Componenti — usano SOLO i token semantici (--ag-bg, --ag-fg, --ag-accent…).
+   Su una fascia scura i ruoli si rimappano in .ag-band--dark: i componenti
+   non hanno varianti «su scuro» proprie.
+   ========================================================================== */
+
+/* --- Fasce: il ritmo chiaro/scuro della pagina --------------------------- */
+.ag-band { padding-block: var(--ag-band-pad); background: var(--ag-bg); color: var(--ag-fg); }
+.ag-band--soft { background: var(--ag-bg-alt); }
+.ag-band--dark, .ag-band--verde {
+  --ag-fg: var(--ag-on-dark);
+  --ag-fg-body: var(--ag-on-dark-muted);
+  --ag-fg-muted: var(--ag-on-dark-muted);
+  --ag-accent: var(--ag-accent-dark);
+  --ag-border: var(--ag-border-dark);
+  background: var(--ag-bg-dark); color: var(--ag-fg);
+}
+.ag-band--verde { background: var(--ag-bg-dark-alt); }
+.ag-band--tight { padding-block: clamp(44px, 5.2vw, 80px); }
+
+/* --- Intestazione di sezione: eyebrow a sinistra, titolo a destra -------- */
+.ag-head { display: grid; grid-template-columns: .4fr 1.6fr; gap: var(--ag-space-10);
+  align-items: start; margin-bottom: var(--ag-space-14); }
+.ag-head .ag-eyebrow { padding-top: .9em; }
+.ag-head h2 { margin: 0; }
+.ag-head div > p { margin: var(--ag-space-6) 0 0; color: var(--ag-fg-body); max-width: var(--ag-measure); }
+@media (max-width: 760px) { .ag-head { grid-template-columns: 1fr; gap: var(--ag-space-4); } .ag-head .ag-eyebrow { padding-top: 0; } }
+
+/* --- Bottoni: rettangolo, maiuscolo spaziato, niente raggio -------------- */
+.ag-btn { display: inline-block; text-decoration: none; cursor: pointer; font: inherit;
+  font-size: var(--ag-fs-ui); text-transform: uppercase; letter-spacing: var(--ag-ls-ui); line-height: 1;
+  padding: var(--ag-space-4) var(--ag-space-6); border: var(--ag-border-w) solid var(--ag-fg);
+  border-radius: var(--ag-radius); background: transparent; color: var(--ag-fg);
+  transition: background var(--ag-dur), color var(--ag-dur), border-color var(--ag-dur); }
+.ag-btn:hover { background: var(--ag-fg); color: var(--ag-bg); }
+.ag-btn:focus-visible { outline: 2px solid var(--ag-accent); outline-offset: 3px; }
+.ag-btn--primary { background: var(--ag-rust); border-color: var(--ag-rust); color: var(--ag-accent-on); }
+.ag-btn--primary:hover { background: var(--ag-accent-strong); border-color: var(--ag-accent-strong); color: var(--ag-accent-on); }
+.ag-band--dark .ag-btn:not(.ag-btn--primary), .ag-band--verde .ag-btn:not(.ag-btn--primary) { border-color: var(--ag-border-dark); }
+.ag-band--dark .ag-btn:not(.ag-btn--primary):hover, .ag-band--verde .ag-btn:not(.ag-btn--primary):hover {
+  background: var(--ag-paper); color: var(--ag-ink); border-color: var(--ag-paper); }
+.ag-actions { display: flex; flex-wrap: wrap; gap: var(--ag-space-3); margin-top: var(--ag-space-8); }
+
+/* --- Link di testo ------------------------------------------------------- */
+.ag-link { font-size: var(--ag-fs-ui); text-transform: uppercase; letter-spacing: .1em; text-decoration: none;
+  border-bottom: 1px solid transparent; padding-bottom: 2px; color: var(--ag-fg); }
+.ag-link:hover { border-color: currentColor; }
+.ag-link--arrow::after { content: ' →'; }
+
+/* --- Navigazione --------------------------------------------------------- */
+.ag-nav { position: sticky; top: 0; z-index: 40; background: rgb(240 239 238 / .93);
+  backdrop-filter: blur(9px); border-bottom: 1px solid var(--ag-border); }
+.ag-nav__inner { display: flex; align-items: center; justify-content: space-between;
+  height: var(--ag-nav-h); gap: var(--ag-space-5); }
+.ag-nav__links { display: flex; align-items: center; gap: var(--ag-space-6); }
+@media (max-width: 720px) { .ag-nav__links .ag-link { display: none; } }
+
+/* --- Lockup: monogramma + nome ------------------------------------------- */
+.ag-lockup { display: flex; align-items: center; gap: 13px; text-decoration: none; color: var(--ag-fg); }
+.ag-lockup img { display: block; }
+.ag-lockup b { display: block; font-weight: var(--ag-fw-medium); font-size: 1.12rem; letter-spacing: -.015em; line-height: 1.2; }
+.ag-lockup small { display: block; font-size: .76rem; color: var(--ag-fg-muted); letter-spacing: .05em; }
+
+/* --- Card: progetto / caso studio --------------------------------------- */
+.ag-card { display: flex; flex-direction: column; background: var(--ag-white); color: var(--ag-ink);
+  border: 1px solid var(--ag-border); text-decoration: none; }
+.ag-band--soft .ag-card { border-color: transparent; }
+.ag-card__media { aspect-ratio: 4 / 3; background: var(--ag-soft); overflow: hidden; }
+.ag-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s var(--ag-ease); }
+.ag-card:hover .ag-card__media img { transform: scale(1.03); }
+.ag-card__body { padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; gap: var(--ag-space-3); flex: 1; }
+.ag-card__body h3 { margin: 0; font-size: clamp(1.6rem, 2.4vw, 2.3rem); font-weight: var(--ag-fw-light); letter-spacing: -.03em; line-height: 1.05; }
+.ag-card__body p { margin: 0; color: var(--ag-body); }
+.ag-card__body .ag-link { margin-top: auto; padding-top: var(--ag-space-4); align-self: flex-start; color: var(--ag-ink); }
+
+/* --- Passi numerati: il percorso con il cliente ------------------------- */
+.ag-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  border-top: 1px solid var(--ag-border); counter-reset: passo; margin: 0; padding: 0; list-style: none; }
+.ag-steps li { padding: var(--ag-space-6) var(--ag-space-6) var(--ag-space-8) 0; border-bottom: 1px solid var(--ag-border); counter-increment: passo; }
+.ag-steps li::before { content: counter(passo, decimal-leading-zero); display: block; color: var(--ag-accent);
+  font-size: var(--ag-fs-eyebrow); letter-spacing: var(--ag-ls-eyebrow); font-weight: var(--ag-fw-medium); margin-bottom: var(--ag-space-4); }
+.ag-steps h3 { margin: 0 0 var(--ag-space-2); }
+.ag-steps p { margin: 0; color: var(--ag-fg-body); font-size: var(--ag-fs-small); }
+
+/* --- Elenco a filetti (cosa ricevi, servizi) ----------------------------- */
+.ag-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ag-border); }
+.ag-list li { padding: var(--ag-space-5) 0; border-bottom: 1px solid var(--ag-border); display: grid;
+  grid-template-columns: minmax(140px, .5fr) 1.5fr; gap: var(--ag-space-6); }
+.ag-list b { font-weight: var(--ag-fw-medium); }
+.ag-list span { color: var(--ag-fg-body); }
+@media (max-width: 620px) { .ag-list li { grid-template-columns: 1fr; gap: var(--ag-space-1); } }
+
+/* --- Citazione / manifesto ---------------------------------------------- */
+.ag-quote-block { margin: 0; }
+.ag-quote-block p { max-width: 22ch; font-size: var(--ag-fs-h2); line-height: 1.04; font-weight: var(--ag-fw-light);
+  letter-spacing: var(--ag-ls-title); margin: 0; text-wrap: balance; }
+.ag-quote-block footer { margin-top: var(--ag-space-6); font-size: var(--ag-fs-eyebrow); text-transform: uppercase;
+  letter-spacing: var(--ag-ls-eyebrow); color: var(--ag-accent); font-weight: var(--ag-fw-medium); }
+
+/* --- FAQ ----------------------------------------------------------------- */
+.ag-faq { border-top: 1px solid var(--ag-border); }
+.ag-faq details { border-bottom: 1px solid var(--ag-border); }
+.ag-faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: var(--ag-space-6);
+  padding: var(--ag-space-6) 0; font-size: var(--ag-fs-h3); line-height: var(--ag-lh-h3); font-weight: var(--ag-fw-light); letter-spacing: -.02em; }
+.ag-faq summary::-webkit-details-marker { display: none; }
+.ag-faq summary::after { content: '+'; color: var(--ag-accent); font-weight: var(--ag-fw-light); transition: transform var(--ag-dur); }
+.ag-faq details[open] summary::after { transform: rotate(45deg); }
+.ag-faq details p { margin: 0 0 var(--ag-space-8); max-width: var(--ag-measure-wide); color: var(--ag-fg-body); }
+
+/* --- Dato / numero ------------------------------------------------------- */
+.ag-stat { border-top: 1px solid var(--ag-border); padding-top: var(--ag-space-4); }
+.ag-stat b { display: block; font-size: clamp(2.6rem, 5vw, 4.4rem); line-height: 1; font-weight: var(--ag-fw-ultralight); letter-spacing: -.04em; }
+.ag-stat span { display: block; margin-top: var(--ag-space-3); font-size: var(--ag-fs-small); color: var(--ag-fg-muted); max-width: 26ch; }
+
+/* --- Campi di contatto --------------------------------------------------- */
+.ag-field { display: grid; gap: var(--ag-space-2); }
+.ag-field label { font-size: var(--ag-fs-eyebrow); text-transform: uppercase; letter-spacing: var(--ag-ls-eyebrow);
+  color: var(--ag-fg-muted); font-weight: var(--ag-fw-medium); }
+.ag-input { font: inherit; font-size: var(--ag-fs-body); color: var(--ag-fg); background: transparent; border: 0;
+  border-bottom: 1px solid var(--ag-fg); border-radius: 0; padding: var(--ag-space-2) 0; }
+.ag-input::placeholder { color: var(--ag-fg-muted); }
+.ag-input:focus { outline: none; border-bottom-color: var(--ag-accent); box-shadow: 0 1px 0 var(--ag-accent); }
+textarea.ag-input { resize: vertical; min-height: 6em; }
+
+/* --- Footer -------------------------------------------------------------- */
+.ag-footer { padding-block: var(--ag-space-20) var(--ag-space-10); }
+.ag-footer__top { display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--ag-space-10); align-items: end;
+  padding-bottom: var(--ag-space-12); border-bottom: 1px solid var(--ag-border); }
+.ag-footer__payoff { font-size: var(--ag-fs-h2); line-height: 1; font-weight: var(--ag-fw-light); letter-spacing: var(--ag-ls-title); margin: 0; }
+.ag-footer__contatti { display: grid; gap: var(--ag-space-2); justify-items: start; }
+.ag-footer__bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--ag-space-4);
+  padding-top: var(--ag-space-6); font-size: var(--ag-fs-small); color: var(--ag-fg-muted); }
+@media (max-width: 760px) { .ag-footer__top { grid-template-columns: 1fr; } }

@@ -1,0 +1,146 @@
+/* ==========================================================================
+   Alessio Granella — token di colore, tipo e spazio
+   Fonte di verità visiva: alessiogranella.com e gli asset AI Brand System.
+   Specchio JS in src/tokens.ts: se tocchi un valore qui, aggiornalo anche là.
+   ========================================================================== */
+
+/* DT Augustina Slab — licenze MyFonts/Monotype:
+   - Desktop (OTF, ordine 5695894913194): uso locale e PDF; gli OTF non vanno mai nel repo.
+   - Webfonts annuale, 10.000 pageview/mese (ordine #6538608): copre i WOFF2 qui sotto
+     per la libreria online. Se la licenza web scade, togliere la pubblicazione. */
+@font-face { font-family: 'Augustina'; src: url('./font/DTAugustinaSlab-3UlLight.woff2') format('woff2'); font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Augustina'; src: url('./font/DTAugustinaSlab-Italic3UlLight.woff2') format('woff2'); font-weight: 200; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Augustina'; src: url('./font/DTAugustinaSlab-3Light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Augustina'; src: url('./font/DTAugustinaSlab-Italic3Light.woff2') format('woff2'); font-weight: 300; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Augustina'; src: url('./font/DTAugustinaSlab-3Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Augustina'; src: url('./font/DTAugustinaSlab-Italic3Regular.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Augustina'; src: url('./font/DTAugustinaSlab-3Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Augustina'; src: url('./font/DTAugustinaSlab-Italic3Medium.woff2') format('woff2'); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Augustina'; src: url('./font/DTAugustinaSlab-3SBold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Augustina'; src: url('./font/DTAugustinaSlab-Italic3SBold.woff2') format('woff2'); font-weight: 600; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Augustina'; src: url('./font/DTAugustinaSlab-3Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Augustina'; src: url('./font/DTAugustinaSlab-Italic3Bold.woff2') format('woff2'); font-weight: 700; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Augustina'; src: url('./font/DTAugustinaSlab-3ExBold.woff2') format('woff2'); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Augustina'; src: url('./font/DTAugustinaSlab-Italic3ExBold.woff2') format('woff2'); font-weight: 800; font-style: italic; font-display: swap; }
+
+:root {
+  /* --- Palette di base -------------------------------------------------- */
+  --ag-paper:    #F0EFEE;  /* fondo di pagina: carta, non bianco */
+  --ag-soft:     #DFDAD5;  /* fasce chiare alternate, schede */
+  --ag-white:    #FFFFFF;
+  --ag-ink:      #1A2B1E;  /* testo e fasce scure: verde quasi nero */
+  --ag-verde:    #243728;  /* fasce scure secondarie, footer */
+  --ag-rust:     #D14124;  /* l'unico accento: azioni, eyebrow, monogramma */
+  --ag-muschio:  #8FAF90;  /* accento sulle fasce scure */
+  --ag-blu-nero: #0F1821;  /* nero profondo per foto e fondi notturni */
+
+  /* --- Toni di servizio (derivati, non colori di brand) ----------------- */
+  --ag-rust-strong:   #B8381F;  /* hover e testo rust piccolo su carta (AA) */
+  --ag-line:          #C8C6C2;  /* filetti su carta */
+  --ag-line-dark:     #485349;  /* filetti su verde */
+  --ag-body:          #344238;  /* testo corrente */
+  --ag-muted:         #5D6A60;  /* didascalie, note */
+  --ag-on-dark:       #E4E8E4;  /* testo su ink/verde */
+  --ag-on-dark-muted: #ADB8AE;  /* testo secondario su ink/verde */
+
+  /* --- Ruoli semantici: i componenti usano SOLO questi ------------------ */
+  --ag-bg:              var(--ag-paper);
+  --ag-bg-alt:          var(--ag-soft);
+  --ag-bg-dark:         var(--ag-ink);
+  --ag-bg-dark-alt:     var(--ag-verde);
+  --ag-fg:              var(--ag-ink);
+  --ag-fg-body:         var(--ag-body);
+  --ag-fg-muted:        var(--ag-muted);
+  --ag-accent:          var(--ag-rust);
+  --ag-accent-strong:   var(--ag-rust-strong);
+  --ag-accent-on:       var(--ag-white);
+  --ag-accent-dark:     var(--ag-muschio);   /* l'accento quando il fondo è scuro */
+  --ag-border:          var(--ag-line);
+  --ag-border-dark:     var(--ag-line-dark);
+
+  /* --- Tipografia: un solo carattere, nessuna sans ---------------------- */
+  --ag-font: 'Augustina', Georgia, 'Times New Roman', serif;
+
+  --ag-fw-ultralight: 200;
+  --ag-fw-light:      300;   /* titoli */
+  --ag-fw-regular:    400;   /* corpo, h3 */
+  --ag-fw-medium:     500;   /* eyebrow, wordmark, enfasi */
+
+  --ag-fs-display: clamp(3.1rem, 7.4vw, 7.4rem);  /* hero, manifesto */
+  --ag-fs-h1:      clamp(2.6rem, 5.6vw, 5.4rem);
+  --ag-fs-h2:      clamp(2.2rem, 4.4vw, 4.1rem);
+  --ag-fs-h3:      1.65rem;
+  --ag-fs-h4:      1.25rem;
+  --ag-fs-lead:    1.14rem;
+  --ag-fs-body:    18px;
+  --ag-fs-small:   0.92rem;
+  --ag-fs-ui:      0.8rem;    /* bottoni, nav: maiuscolo spaziato */
+  --ag-fs-eyebrow: 0.72rem;
+
+  --ag-lh-display: 0.92;
+  --ag-lh-title:   1;
+  --ag-lh-h3:      1.12;
+  --ag-lh-body:    1.55;
+
+  --ag-ls-title:   -0.035em;
+  --ag-ls-ui:      0.09em;
+  --ag-ls-eyebrow: 0.15em;
+
+  --ag-measure:      62ch;   /* paragrafo */
+  --ag-measure-wide: 74ch;
+
+  /* --- Spazio: scala 4px ------------------------------------------------ */
+  --ag-space-1: 4px;   --ag-space-2: 8px;   --ag-space-3: 12px;  --ag-space-4: 16px;
+  --ag-space-5: 20px;  --ag-space-6: 24px;  --ag-space-8: 32px;  --ag-space-10: 40px;
+  --ag-space-12: 48px; --ag-space-14: 56px; --ag-space-16: 64px; --ag-space-20: 80px;
+  --ag-space-24: 96px; --ag-space-32: 128px;
+
+  /* --- Layout ----------------------------------------------------------- */
+  --ag-max:       1280px;
+  --ag-gutter:    32px;
+  --ag-band-pad:  clamp(72px, 9vw, 132px);   /* respiro verticale di una fascia */
+  --ag-nav-h:     96px;
+
+  /* --- Forma: piatto, squadrato, niente ombre --------------------------- */
+  --ag-radius:  0;
+  --ag-border-w: 1px;
+  --ag-ease:    cubic-bezier(.2, .7, .2, 1);
+  --ag-dur:     .18s;
+}
+
+@media (max-width: 520px) {
+  :root { --ag-gutter: 20px; --ag-fs-body: 17px; }
+}
+
+/* --- Base tipografica ---------------------------------------------------- */
+.ag, body.ag {
+  margin: 0;
+  background: var(--ag-bg);
+  color: var(--ag-fg);
+  font-family: var(--ag-font);
+  font-weight: var(--ag-fw-regular);
+  font-size: var(--ag-fs-body);
+  line-height: var(--ag-lh-body);
+  -webkit-font-smoothing: antialiased;
+}
+/* Base a specificità zero (:where): qualsiasi classe di componente la sovrascrive. */
+:where(.ag) :where(h1, h2, h3, h4, p) { margin-top: 0; }
+:where(.ag) :where(h1, h2, h3) { font-weight: var(--ag-fw-light); letter-spacing: var(--ag-ls-title); text-wrap: balance; }
+:where(.ag) h1 { font-size: var(--ag-fs-h1); line-height: var(--ag-lh-display); }
+:where(.ag) h2 { font-size: var(--ag-fs-h2); line-height: var(--ag-lh-title); }
+:where(.ag) h3 { font-size: var(--ag-fs-h3); line-height: var(--ag-lh-h3); font-weight: var(--ag-fw-regular); }
+:where(.ag) h4 { font-size: var(--ag-fs-h4); line-height: 1.2; font-weight: var(--ag-fw-medium); letter-spacing: -0.01em; }
+:where(.ag) a { color: inherit; }
+/* L'enfasi non è corsivo: è colore. Una parola, non una frase. */
+:where(.ag) em { font-style: normal; color: var(--ag-accent); }
+
+.ag-display { font-size: var(--ag-fs-display); line-height: var(--ag-lh-display);
+  font-weight: var(--ag-fw-light); letter-spacing: var(--ag-ls-title); text-wrap: balance; margin: 0; }
+.ag-lead { font-size: var(--ag-fs-lead); color: var(--ag-fg-body); max-width: var(--ag-measure); }
+.ag-small { font-size: var(--ag-fs-small); color: var(--ag-fg-muted); }
+.ag-eyebrow { color: var(--ag-accent); font-size: var(--ag-fs-eyebrow); font-weight: var(--ag-fw-medium);
+  text-transform: uppercase; letter-spacing: var(--ag-ls-eyebrow); margin: 0; }
+.ag-quote { font-style: italic; font-weight: var(--ag-fw-light); }
+
+/* --- Contenitore --------------------------------------------------------- */
+.ag-wrap { max-width: var(--ag-max); margin-inline: auto; padding-inline: var(--ag-gutter); }

@@ -1,0 +1,33 @@
+{
+  "name": "alessio-granella-design-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Design system del brand personale di Alessio Granella — token, componenti e libreria consultabile",
+  "type": "module",
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens": "./src/tokens.ts",
+    "./tokens.css": "./src/styles/colors_and_type.css",
+    "./components.css": "./src/styles/components.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "pantone": "python3 -I scripts/pantone.py",
+    "brandbook": "sh scripts/brandbook.sh"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5"
+  }
+}
